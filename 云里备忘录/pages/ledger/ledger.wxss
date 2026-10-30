@@ -1,0 +1,577 @@
+/* 看板 */
+.board {
+  margin-top: 12rpx;
+  padding: 26rpx 28rpx 30rpx;
+}
+
+.board__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.board__month {
+  display: flex;
+  align-items: center;
+}
+
+.board__arrow {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: var(--ink-mute);
+}
+
+.board__label {
+  font-size: 24rpx;
+  color: var(--ink-soft);
+  letter-spacing: 1rpx;
+  padding: 0 6rpx;
+}
+
+.board__report {
+  font-size: 22rpx;
+  color: var(--brand);
+  padding: 8rpx 20rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 22rpx;
+}
+
+.board__num {
+  margin-top: 14rpx;
+  display: flex;
+  align-items: baseline;
+}
+
+.board__sign {
+  font-size: 32rpx;
+  color: var(--red);
+  margin-right: 6rpx;
+}
+
+.board__expense {
+  font-size: 72rpx;
+  line-height: 1.2;
+  color: var(--red);
+  letter-spacing: 1rpx;
+}
+
+.board__income {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: var(--ink-mute);
+}
+
+/* 月度对比 */
+.cmp {
+  margin-top: 16rpx;
+  padding: 22rpx 28rpx;
+  background: var(--card-soft);
+}
+
+.cmp__row {
+  display: flex;
+  align-items: baseline;
+}
+
+.cmp__label {
+  font-size: 22rpx;
+  color: var(--ink-mute);
+  letter-spacing: 1rpx;
+}
+
+.cmp__diff {
+  margin-left: 14rpx;
+  font-size: 30rpx;
+}
+
+.cmp__diff.is-up {
+  color: var(--red);
+}
+
+.cmp__diff.is-down {
+  color: var(--moss);
+}
+
+.cmp__text {
+  margin-top: 10rpx;
+  font-size: 23rpx;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+/* 输入区 */
+.entry {
+  margin-top: 22rpx;
+  padding: 26rpx 30rpx 32rpx;
+}
+
+.entry__types {
+  display: flex;
+  gap: 12rpx;
+}
+
+.type {
+  flex: 0 0 auto;
+  padding: 8rpx 28rpx;
+  border-radius: 22rpx;
+  border: 1rpx solid var(--line);
+  font-size: 22rpx;
+  color: var(--ink-soft);
+}
+
+.type.is-on {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--on-brand);
+}
+
+/* 金额是这张卡的主角，给足高度，别让数字贴着下划线 */
+.amount {
+  display: flex;
+  align-items: center;
+  margin: 26rpx 0 0;
+  padding: 6rpx 0 24rpx;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.amount__sign {
+  font-size: 44rpx;
+  line-height: 1;
+  color: var(--ink-soft);
+  margin-right: 16rpx;
+}
+
+.amount__input {
+  flex: 1;
+  min-width: 0;
+  height: 112rpx;
+  line-height: 112rpx;
+  font-size: 84rpx;
+  letter-spacing: 1rpx;
+  color: var(--ink);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 30rpx;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+  border: 1rpx solid var(--line);
+  background: var(--card);
+  font-size: 20rpx;
+  color: var(--ink-soft);
+}
+
+.tag.is-on {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--chip-on-bg);
+}
+
+.tag__dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+
+.tag--add {
+  width: 52rpx;
+  justify-content: center;
+  color: var(--ink-mute);
+  border-style: dashed;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--line-soft);
+}
+
+.row__label {
+  width: 132rpx;
+  flex: 0 0 132rpx;
+  font-size: 22rpx;
+  color: var(--ink-mute);
+}
+
+.row__input {
+  flex: 1;
+  min-width: 0;
+  font-size: 24rpx;
+  color: var(--ink);
+}
+
+.row__value {
+  flex: 1;
+  font-size: 24rpx;
+  color: var(--ink);
+  letter-spacing: 1rpx;
+}
+
+.row__hint {
+  font-size: 20rpx;
+  color: var(--ink-faint);
+}
+
+.entry__save {
+  margin-top: 34rpx;
+  height: 96rpx;
+  border-radius: 48rpx;
+  background: var(--red);
+  color: var(--on-brand);
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ph {
+  color: var(--ink-faint);
+}
+
+/* 搜索 */
+.search {
+  display: flex;
+  align-items: center;
+  margin: 28rpx 0 10rpx;
+  padding: 0 24rpx;
+  height: 76rpx;
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  border-radius: 38rpx;
+}
+
+.search__input {
+  flex: 1;
+  min-width: 0;
+  font-size: 24rpx;
+  color: var(--ink);
+}
+
+.search__clear {
+  font-size: 20rpx;
+  color: var(--ink-mute);
+  padding-left: 16rpx;
+}
+
+/* 明细 */
+.group {
+  margin-top: 22rpx;
+}
+
+.group__head {
+  padding: 0 6rpx 10rpx;
+}
+
+.group__day {
+  font-size: 20rpx;
+  letter-spacing: 2rpx;
+  color: var(--ink-faint);
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  padding: 22rpx 24rpx;
+  margin-bottom: 12rpx;
+}
+
+.item__dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  margin: 12rpx 18rpx 0 0;
+  flex: 0 0 12rpx;
+}
+
+.item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.item__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.item__tag {
+  font-size: 26rpx;
+  color: var(--ink);
+}
+
+.item__amount {
+  font-size: 30rpx;
+  color: var(--ink);
+}
+
+.item__amount.is-income {
+  color: var(--moss);
+}
+
+.item__sub {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 6rpx;
+}
+
+.item__remark {
+  flex: 1;
+  min-width: 0;
+  font-size: 22rpx;
+  color: var(--ink-mute);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.item__time {
+  flex: 0 0 auto;
+  margin-left: 16rpx;
+  font-size: 20rpx;
+  color: var(--ink-faint);
+}
+
+.empty {
+  padding: 90rpx 0 40rpx;
+  text-align: center;
+}
+
+.empty__text {
+  font-size: 24rpx;
+  color: var(--ink-mute);
+}
+
+.empty__sub {
+  margin-top: 10rpx;
+  font-size: 20rpx;
+  color: var(--ink-faint);
+}
+
+/* 弹层 */
+.mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(59, 52, 42, 0.34);
+  z-index: 299;
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  padding: 18rpx 30rpx calc(30rpx + env(safe-area-inset-bottom));
+  background: var(--card);
+  border-radius: 34rpx 34rpx 0 0;
+  box-shadow: 0 -12rpx 40rpx rgba(59, 52, 42, 0.12);
+  animation: sheet-in 0.24s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.sheet__handle {
+  width: 68rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  background: var(--line);
+  margin: 0 auto 20rpx;
+}
+
+.sheet__title {
+  font-size: 30rpx;
+  color: var(--ink);
+  text-align: center;
+}
+
+.sheet__quick {
+  display: flex;
+  gap: 14rpx;
+  justify-content: center;
+  margin-top: 22rpx;
+}
+
+.mini {
+  padding: 8rpx 24rpx;
+  border-radius: 22rpx;
+  border: 1rpx solid var(--line);
+  font-size: 20rpx;
+  color: var(--ink-soft);
+}
+
+.mini.is-on {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--chip-on-bg);
+}
+
+.picks {
+  display: flex;
+  gap: 18rpx;
+  margin-top: 22rpx;
+}
+
+.picks picker {
+  flex: 1;
+}
+
+.pick {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx 24rpx;
+  background: var(--card-soft);
+  border: 1rpx solid var(--line);
+  border-radius: 18rpx;
+}
+
+.pick__label {
+  font-size: 20rpx;
+  color: var(--ink-mute);
+}
+
+.pick__value {
+  margin-top: 6rpx;
+  font-size: 28rpx;
+  color: var(--ink);
+  letter-spacing: 1rpx;
+}
+
+.sheet__input {
+  margin-top: 22rpx;
+  height: 88rpx;
+  padding: 0 24rpx;
+  background: var(--card-soft);
+  border: 1rpx solid var(--line);
+  border-radius: 18rpx;
+  font-size: 28rpx;
+  color: var(--ink);
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22rpx;
+  margin-top: 24rpx;
+  padding: 0 6rpx;
+}
+
+.swatch {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  border: 4rpx solid transparent;
+}
+
+.swatch.is-on {
+  border-color: var(--card);
+  box-shadow: 0 0 0 2rpx var(--ink);
+}
+
+.sheet__actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.btn {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  letter-spacing: 3rpx;
+}
+
+.btn--primary {
+  background: var(--red);
+  color: var(--on-brand);
+}
+
+.btn--ghost {
+  flex: 0 0 200rpx;
+  border: 1rpx solid var(--line);
+  color: var(--ink-soft);
+  background: var(--card);
+}
+
+.btn--ghost.is-danger {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--chip-on-bg);
+}
+
+.sheet__types {
+  margin-top: 22rpx;
+}
+
+.sheet .amount {
+  margin-top: 16rpx;
+  padding-bottom: 18rpx;
+}
+
+.sheet .tags {
+  margin-top: 18rpx;
+}
+
+/* 月报 */
+.report {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 400;
+  background: rgba(59, 52, 42, 0.72);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 40rpx;
+}
+
+.report__img {
+  width: 100%;
+  max-height: 78vh;
+  border-radius: 12rpx;
+}
+
+.report__tip {
+  margin-top: 24rpx;
+  font-size: 20rpx;
+  color: rgba(255, 253, 248, 0.82);
+  letter-spacing: 1rpx;
+}
+
+.report__canvas {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 750px;
+}

@@ -1,0 +1,117 @@
+.me {
+  display: flex;
+  align-items: center;
+  padding: 32rpx 30rpx;
+  margin-top: 12rpx;
+}
+
+.me__avatar {
+  width: 108rpx;
+  height: 108rpx;
+  flex: 0 0 108rpx;
+  border-radius: 50%;
+  background: var(--card-soft);
+  border: 1rpx solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  color: var(--ink);
+}
+
+.me__info {
+  flex: 1;
+  min-width: 0;
+  margin-left: 26rpx;
+}
+
+.me__name {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.me__line {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  line-height: 1.7;
+  color: var(--ink-mute);
+}
+
+.board {
+  margin-top: 22rpx;
+  padding: 30rpx;
+}
+
+.board__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.board__label {
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+  color: var(--ink-mute);
+}
+
+.board__hint {
+  font-size: 20rpx;
+  color: var(--ink-faint);
+}
+
+.board__num {
+  margin-top: 10rpx;
+  font-size: 56rpx;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.board__line {
+  margin: 22rpx 0;
+}
+
+.board__grid {
+  display: flex;
+}
+
+.board__cell {
+  flex: 1;
+  text-align: center;
+}
+
+.board__cell-num {
+  font-size: 34rpx;
+  color: var(--ink);
+}
+
+.board__cell-label {
+  margin-top: 4rpx;
+  font-size: 20rpx;
+  color: var(--ink-mute);
+}
+
+.note {
+  margin-top: 22rpx;
+  padding: 28rpx 30rpx;
+  background: var(--card-soft);
+}
+
+.note__title {
+  font-size: 28rpx;
+  color: var(--ink);
+}
+
+.note__text {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.foot {
+  padding: 50rpx 0 10rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: var(--ink-faint);
+  letter-spacing: 1rpx;
+}

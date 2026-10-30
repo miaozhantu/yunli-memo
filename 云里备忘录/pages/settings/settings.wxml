@@ -1,0 +1,85 @@
+<view class="root theme-{{theme}}">
+<nav-bar title="设置" showBack="{{false}}" />
+
+<view class="page-body">
+  <view class="group__title">偏好</view>
+  <view class="card group">
+    <view class="row">
+      <view class="row__body">
+        <view class="row__label">情绪文案</view>
+        <view class="row__hint">关掉之后，提示语变成「已保存」这种朴素的说法</view>
+      </view>
+      <switch checked="{{moodCopy}}" color="#C0553F" bindchange="onMoodChange" />
+    </view>
+  </view>
+
+  <view class="group__title">外观与帮助</view>
+  <view class="card group">
+    <view class="row" bindtap="goTheme">
+      <view class="row__body">
+        <view class="row__label">主题皮肤</view>
+        <view class="row__hint">{{themeName}}</view>
+      </view>
+      <text class="row__value">›</text>
+    </view>
+    <view class="hairline"></view>
+    <view class="row" bindtap="goGuide">
+      <view class="row__body">
+        <view class="row__label">使用说明</view>
+        <view class="row__hint">单击双击怎么用、怎么打勾、粒度改什么，都写在这</view>
+      </view>
+      <text class="row__value">›</text>
+    </view>
+  </view>
+
+  <view class="group__title">数据</view>
+  <view class="card group">
+    <view class="row">
+      <view class="row__body">
+        <view class="row__label">导出全部数据</view>
+        <view class="row__hint">{{summary}}</view>
+      </view>
+      <view class="row__btn" bindtap="exportData">导出发送</view>
+    </view>
+    <view class="hairline"></view>
+    <view class="row">
+      <view class="row__body">
+        <view class="row__label">复制成文本</view>
+        <view class="row__hint">存成文件不方便时，粘到备忘录或电脑上也行</view>
+      </view>
+      <view class="row__btn row__btn--ghost" bindtap="copyData">复制</view>
+    </view>
+  </view>
+
+  <view class="card group">
+    <view class="row row--plain">
+      <view class="row__body">
+        <view class="row__label">只存在这台手机上</view>
+        <view class="row__hint">日程、笔记、账目都保存在本机，没有服务器，也不会上传。换手机前先用上面的导出，导出的 JSON 可以发给自己存着。</view>
+      </view>
+    </view>
+    <view class="hairline"></view>
+    <view class="row row--plain">
+      <view class="row__body">
+        <view class="row__label">录音不上传</view>
+        <view class="row__hint">录音只写进系统临时目录，退出小程序后可能被清掉，重要内容建议用文字再记一遍。</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="group__title">关于</view>
+  <view class="card group">
+    <view class="row row--plain">
+      <view class="row__body">
+        <view class="row__label">云里备忘录</view>
+        <view class="row__hint">日程、笔记、账单，装在同一本纸里</view>
+      </view>
+      <text class="row__value">v{{version}}</text>
+    </view>
+  </view>
+
+  <view class="foot">纸可以换，字不会跑，别的事慢慢来</view>
+</view>
+
+<paper-toast id="paper-toast" />
+</view>

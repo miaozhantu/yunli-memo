@@ -1,0 +1,132 @@
+.intro {
+  padding: 12rpx 8rpx 22rpx;
+  font-size: 24rpx;
+  line-height: 1.9;
+  color: var(--ink-mute);
+}
+
+.skin {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 22rpx;
+  margin-bottom: 22rpx;
+  border: 2rpx solid var(--line);
+}
+
+.skin.is-on {
+  border-color: var(--red);
+}
+
+.skin__preview {
+  width: 176rpx;
+  height: 176rpx;
+  flex: 0 0 176rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1rpx solid var(--line);
+  background-color: var(--paper);
+  background-image: var(--tex, none);
+  background-size: var(--tex-size, auto);
+  background-repeat: repeat;
+}
+
+.skin__paper {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 12rpx;
+  border: 2rpx solid var(--line);
+  background: var(--card);
+  padding: 18rpx 16rpx;
+}
+
+.skin__bar {
+  width: 52rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  background: var(--ink);
+  opacity: 0.85;
+}
+
+.skin__line {
+  margin-top: 12rpx;
+  width: 96rpx;
+  height: 6rpx;
+  border-radius: 3rpx;
+  background: var(--ink);
+  opacity: 0.24;
+}
+
+.skin__line--short {
+  width: 64rpx;
+  opacity: 0.16;
+}
+
+.skin__btn {
+  margin-top: 16rpx;
+  width: 58rpx;
+  height: 20rpx;
+  border-radius: 10rpx;
+  background: var(--red);
+}
+
+.skin__meta {
+  flex: 1;
+  min-width: 0;
+  padding-left: 24rpx;
+}
+
+.skin__name {
+  font-size: 30rpx;
+  color: var(--ink);
+}
+
+.skin__desc {
+  margin-top: 8rpx;
+  font-size: 21rpx;
+  line-height: 1.7;
+  color: var(--ink-mute);
+}
+
+.skin__dots {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.skin__dot {
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+  border: 1rpx solid var(--line);
+}
+
+.skin__check {
+  position: absolute;
+  right: 24rpx;
+  top: 22rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  color: var(--on-brand);
+}
+
+.skin__check.is-on {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.note {
+  margin: 30rpx 8rpx 0;
+  font-size: 20rpx;
+  line-height: 1.9;
+  color: var(--ink-faint);
+}

@@ -1,0 +1,19 @@
+<view class="root theme-{{theme}}">
+  <nav-bar title="使用说明" showBack="{{true}}" />
+
+  <view class="page-body--plain">
+    <view class="lead">不用全看完，卡住的时候来翻一眼就行。</view>
+
+    <view class="sec card" wx:for="{{sections}}" wx:key="title">
+      <view class="sec__title display">{{item.title}}</view>
+      <view class="sec__item" wx:for="{{item.items}}" wx:for-item="line" wx:key="*this">
+        <view class="sec__dot"></view>
+        <text class="sec__text">{{line}}</text>
+      </view>
+    </view>
+
+    <view class="tail">还有想问的，直接在对话里说，不用忍着。</view>
+  </view>
+
+  <paper-toast id="paper-toast" />
+</view>

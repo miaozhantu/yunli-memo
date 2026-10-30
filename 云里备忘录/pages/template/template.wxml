@@ -1,0 +1,55 @@
+<view class="root theme-{{theme}}">
+<nav-bar title="周模板" showBack="{{true}}" />
+
+<view class="page-body--plain tmpl">
+  <view class="days">
+    <view
+      class="day {{activeDay === item.v ? 'is-on' : ''}}"
+      wx:for="{{days}}"
+      wx:key="v"
+      data-day="{{item.v}}"
+      bindtap="switchDay"
+    >{{item.label}}</view>
+  </view>
+
+  <view class="tip">
+    <text>点格子直接打字，写完点别处就存下了。同一天填满会有点拥挤，建议只写固定的事：上课、例会、健身。</text>
+  </view>
+
+  <view class="slots card">
+    <view class="slot" wx:for="{{slots}}" wx:key="start">
+      <view class="slot__time">{{item.label}}</view>
+
+      <block wx:if="{{editingStart === item.start}}">
+        <input
+          class="slot__input"
+          value="{{item.text}}"
+          focus
+          maxlength="20"
+          placeholder="写点什么"
+          placeholder-class="slot__ph"
+          data-start="{{item.start}}"
+          bindblur="commitEdit"
+          bindconfirm="commitEdit"
+        />
+      </block>
+      <block wx:else>
+        <view
+          class="slot__text {{item.text ? 'has-text' : ''}}"
+          data-start="{{item.start}}"
+          bindtap="onSlotTap"
+        >{{item.text || '空'}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view wx:if="{{filled}}" class="clear" bindtap="clearDay">清空{{days[activeDay - 1].label}}的模板</view>
+</view>
+
+<view class="bar">
+  <view class="bar__hint">同步会按模板重建今天及以后的安排，手动加的不会动</view>
+  <view class="bar__btn" bindtap="syncWeek">同步至本周</view>
+</view>
+
+<paper-toast id="paper-toast" />
+</view>

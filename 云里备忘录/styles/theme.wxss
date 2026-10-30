@@ -1,0 +1,117 @@
+@import "texture.wxss";
+
+/* 主题变量
+   page 上有一套默认值（见 app.wxss），这里给五套可选皮肤。
+   页面根节点挂 .root.theme-x，变量就会在整棵树里生效。
+   自定义底栏是独立组件，样式隔离，所以它自己也 @import 了这个文件。 */
+
+.theme-paper {
+  --paper: #f9f6f0;
+  --card: #fffdf8;
+  --card-soft: #fdf9f0;
+  --line-sub: #f0e7d6;
+  --line: #e6ddcb;
+  --line-soft: #efe6d4;
+  --ink: #3b342a;
+  --ink-soft: #6f6558;
+  --ink-mute: #8b7c64;
+  --ink-faint: #a8977f;
+  --red: #c0553f;
+  --amber: #b5793f;
+  --moss: #5f7a5e;
+  --blue: #7a8fa6;
+  --brand: #8c4a2f;
+  --on-brand: #fff7f2;
+  --chip-on-bg: #fdf1ec;
+}
+
+/* 奶茶碎花：奶茶色纸 + 小碎花底纹，花只做背景，卡片一律实色 */
+.theme-bubble {
+  --paper: #faf1e7;
+  --card: #fffbf5;
+  --card-soft: #f7ebdc;
+  --line-sub: #f5eadb;
+  --line: #ecdbc8;
+  --line-soft: #f3e7d7;
+  --ink: #4a3f35;
+  --ink-soft: #7d6b5c;
+  --ink-mute: #8f7a66;
+  --ink-faint: #b39d87;
+  --red: #c0705a;
+  --amber: #b98652;
+  --moss: #7d8f72;
+  --blue: #8a9bb0;
+  --brand: #a05a44;
+  --on-brand: #fff8f2;
+  --chip-on-bg: #faece2;
+}
+
+/* 机械黑金：近黑底 + 细斜纹，金色只出现在强调处，不用大面积金 */
+.theme-onyx {
+  --paper: #14120f;
+  --card: #1c1915;
+  --card-soft: #221e18;
+  --line-sub: #2a241b;
+  --line: #3d3423;
+  --line-soft: #2b251b;
+  --ink: #efe6d2;
+  --ink-soft: #c2b499;
+  --ink-mute: #8d8170;
+  --ink-faint: #635a4c;
+  --red: #c9a227;
+  --amber: #b08b3e;
+  --moss: #7e8a6a;
+  --blue: #8b9bab;
+  --brand: #d4af37;
+  --on-brand: #17140f;
+  --chip-on-bg: #332a18;
+}
+
+.theme-kraft {
+  --paper: #efe3ce;
+  --card: #fbf3e2;
+  --card-soft: #f5ead6;
+  --line-sub: #e8dac0;
+  --line: #dcc9a6;
+  --line-soft: #e6d6b8;
+  --ink: #4a3a28;
+  --ink-soft: #7a6448;
+  --ink-mute: #86744f;
+  --ink-faint: #ad9878;
+  --red: #a9503a;
+  --amber: #9c6a33;
+  --moss: #5c6e52;
+  --blue: #6f7f8f;
+  --brand: #8a4a30;
+  --on-brand: #fbf3e2;
+  --chip-on-bg: #f3e3ce;
+}
+
+.theme-night {
+  --paper: #1f1c19;
+  --card: #262220;
+  --card-soft: #2e2925;
+  --line-sub: #2c2823;
+  --line: #3a342d;
+  --line-soft: #322d27;
+  --ink: #e8e1d4;
+  --ink-soft: #bdb2a0;
+  --ink-mute: #8a7f6e;
+  --ink-faint: #6b6155;
+  --red: #c97b62;
+  --amber: #c09464;
+  --moss: #86a07c;
+  --blue: #8fa3b8;
+  --brand: #d08a6e;
+  --on-brand: #1f1c19;
+  --chip-on-bg: #3a2b25;
+}
+
+.root {
+  min-height: 100vh;
+  background-color: var(--paper);
+  background-image: var(--tex, none);
+  background-size: var(--tex-size, auto);
+  background-repeat: repeat;
+  color: var(--ink);
+}

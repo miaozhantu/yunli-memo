@@ -1,0 +1,45 @@
+<view class="root theme-{{theme}}">
+<nav-bar title="我的" showBack="{{false}}" />
+
+<view class="page-body">
+  <view class="me card">
+    <view class="me__avatar display">云</view>
+    <view class="me__info">
+      <view class="me__name">这位记录者</view>
+      <view class="me__line">{{line}}</view>
+    </view>
+  </view>
+
+  <view class="board card">
+    <view class="board__head">
+      <text class="board__label">{{monthLabel}}</text>
+      <text class="board__hint">支出</text>
+    </view>
+    <view class="board__num">¥ {{monthSpend}}</view>
+    <view class="hairline board__line"></view>
+    <view class="board__grid">
+      <view class="board__cell">
+        <view class="board__cell-num">{{stats.tasks}}</view>
+        <view class="board__cell-label">条日程</view>
+      </view>
+      <view class="board__cell">
+        <view class="board__cell-num">{{stats.notes}}</view>
+        <view class="board__cell-label">篇笔记</view>
+      </view>
+      <view class="board__cell">
+        <view class="board__cell-num">{{stats.ledger}}</view>
+        <view class="board__cell-label">笔账</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="note card">
+    <view class="note__title display">这个小本子不收集你</view>
+    <view class="note__text">不登录、不要手机号、不读通讯录。日程和账目存在本机，录音只进系统临时目录。</view>
+  </view>
+
+  <view class="foot">云里备忘录 · v0.3.0</view>
+</view>
+
+<paper-toast id="paper-toast" />
+</view>

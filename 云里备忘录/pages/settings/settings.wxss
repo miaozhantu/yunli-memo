@@ -1,0 +1,68 @@
+.group__title {
+  margin: 40rpx 8rpx 14rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  letter-spacing: 2rpx;
+  color: var(--ink-soft);
+}
+
+.group {
+  padding: 6rpx 28rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 0;
+}
+
+.row--plain {
+  align-items: flex-start;
+}
+
+.row__body {
+  flex: 1;
+  min-width: 0;
+  padding-right: 20rpx;
+}
+
+.row__label {
+  font-size: 28rpx;
+  color: var(--ink);
+}
+
+.row__hint {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  line-height: 1.8;
+  color: var(--ink-mute);
+}
+
+.row__value {
+  font-size: 24rpx;
+  color: var(--ink-faint);
+}
+
+.row__btn {
+  flex: 0 0 auto;
+  padding: 12rpx 26rpx;
+  border-radius: 24rpx;
+  background: var(--red);
+  color: var(--on-brand);
+  font-size: 22rpx;
+  letter-spacing: 1rpx;
+}
+
+.row__btn--ghost {
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  color: var(--ink-soft);
+}
+
+.foot {
+  margin-top: 56rpx;
+  text-align: center;
+  font-size: 21rpx;
+  color: var(--ink-mute);
+  letter-spacing: 1rpx;
+}

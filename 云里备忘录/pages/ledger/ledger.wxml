@@ -1,0 +1,261 @@
+<view class="root theme-{{theme}}">
+<nav-bar title="记账" showBack="{{true}}" />
+
+<view class="page-body--plain">
+
+  <view class="board card">
+    <view class="board__head">
+      <view class="board__month">
+        <view class="board__arrow" data-delta="-1" bindtap="switchMonth">‹</view>
+        <text class="board__label">{{monthLabel}}</text>
+        <view class="board__arrow" data-delta="1" bindtap="switchMonth">›</view>
+      </view>
+      <view class="board__report" bindtap="makeReport">生成月报</view>
+    </view>
+
+    <view class="board__num">
+      <text class="board__sign">¥</text>
+      <text class="board__expense">{{expenseText}}</text>
+    </view>
+    <view class="board__income">总收入 ¥{{incomeText}}</view>
+  </view>
+
+  <view wx:if="{{compare}}" class="cmp card">
+    <view class="cmp__row">
+      <text class="cmp__label">比上月</text>
+      <text wx:if="{{!compare.none}}" class="cmp__diff {{compare.up ? 'is-up' : 'is-down'}}">{{compare.diffText}}</text>
+    </view>
+    <view class="cmp__text">{{compare.text}}</view>
+  </view>
+
+  <view class="entry card">
+    <view class="entry__types">
+      <view class="type {{form.type === 'expense' ? 'is-on' : ''}}" data-type="expense" bindtap="onType">支出</view>
+      <view class="type {{form.type === 'income' ? 'is-on' : ''}}" data-type="income" bindtap="onType">收入</view>
+    </view>
+
+    <view class="amount">
+      <text class="amount__sign">¥</text>
+      <input
+        class="amount__input"
+        type="digit"
+        value="{{form.amount}}"
+        placeholder="0.00"
+        placeholder-class="ph"
+        bindinput="onAmount"
+      />
+    </view>
+
+    <view class="tags">
+      <view
+        class="tag {{form.tagId === item.id ? 'is-on' : ''}}"
+        wx:for="{{tags}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onTag"
+      >
+        <view class="tag__dot" style="background:{{item.colorHex}}"></view>{{item.name}}
+      </view>
+      <view class="tag tag--add" bindtap="openTagSheet">＋</view>
+    </view>
+
+    <view class="row">
+      <text class="row__label">备注</text>
+      <input
+        class="row__input"
+        value="{{form.remark}}"
+        placeholder="花在哪了，选填"
+        placeholder-class="ph"
+        maxlength="30"
+        bindinput="onRemark"
+      />
+    </view>
+
+    <view class="row row--tap" bindtap="openTimeSheet">
+      <text class="row__label">发生时间</text>
+      <text class="row__value">{{form.date}} {{form.time}}</text>
+      <text class="row__hint">可补记</text>
+    </view>
+
+    <view class="entry__save" bindtap="addItem">记一笔</view>
+  </view>
+
+  <view class="search">
+    <input
+      class="search__input"
+      value="{{keyword}}"
+      placeholder="搜金额、备注或标签"
+      placeholder-class="ph"
+      confirm-type="search"
+      bindinput="onSearch"
+    />
+    <view wx:if="{{keyword}}" class="search__clear" bindtap="clearSearch">清空</view>
+  </view>
+
+  <view wx:if="{{groups.length}}" class="list">
+    <view class="group" wx:for="{{groups}}" wx:key="day" wx:for-item="group">
+      <view class="group__head">
+        <text class="group__day">{{group.label}}</text>
+      </view>
+      <view class="item card" wx:for="{{group.items}}" wx:key="id" wx:for-item="row" data-id="{{row.id}}" bindtap="onItemTap">
+        <view class="item__dot" style="background:{{row.color}}"></view>
+        <view class="item__body">
+          <view class="item__top">
+            <text class="item__tag">{{row.tagName}}</text>
+            <text class="item__amount {{row.isIncome ? 'is-income' : ''}}">{{row.amountText}}</text>
+          </view>
+          <view class="item__sub">
+            <text class="item__remark">{{row.remark || '没写备注'}}</text>
+            <text class="item__time">{{row.timeText}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty">
+    <view class="empty__text">{{keyword ? '没搜到这个' : '这个月还没有账'}}</view>
+    <view class="empty__sub">{{keyword ? '换个词试试，金额、标签名都行' : '上面填一笔，就开始了'}}</view>
+  </view>
+</view>
+
+<!-- 时间选择 -->
+<view wx:if="{{timeSheet.visible}}" class="mask" bindtap="closeTimeSheet" catchtouchmove="noop"></view>
+<view wx:if="{{timeSheet.visible}}" class="sheet">
+  <view class="sheet__handle"></view>
+  <view class="sheet__title">什么时候花的</view>
+
+  <view class="sheet__quick">
+    <view class="mini" data-offset="0" bindtap="quickDay">今天</view>
+    <view class="mini" data-offset="1" bindtap="quickDay">昨天</view>
+    <view class="mini" data-offset="2" bindtap="quickDay">前天</view>
+  </view>
+
+  <view class="picks">
+    <picker mode="date" value="{{timeSheet.date}}" end="{{maxDate}}" bindchange="onPickDate">
+      <view class="pick">
+        <text class="pick__label">日期</text>
+        <text class="pick__value">{{timeSheet.date}}</text>
+      </view>
+    </picker>
+    <picker mode="time" value="{{timeSheet.time}}" bindchange="onPickTime">
+      <view class="pick">
+        <text class="pick__label">时间</text>
+        <text class="pick__value">{{timeSheet.time}}</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="sheet__actions">
+    <view class="btn btn--primary" bindtap="confirmTime">就这个时间</view>
+  </view>
+</view>
+
+<!-- 自定义标签 -->
+<view wx:if="{{tagSheet.visible}}" class="mask" bindtap="closeTagSheet" catchtouchmove="noop"></view>
+<view wx:if="{{tagSheet.visible}}" class="sheet">
+  <view class="sheet__handle"></view>
+  <view class="sheet__title">新标签</view>
+
+  <input
+    class="sheet__input"
+    value="{{tagSheet.name}}"
+    placeholder="比如：宠物、份子钱"
+    placeholder-class="ph"
+    maxlength="8"
+    bindinput="onTagName"
+  />
+
+  <view class="swatches">
+    <view
+      class="swatch {{tagSheet.color === item ? 'is-on' : ''}}"
+      wx:for="{{colors}}"
+      wx:key="*this"
+      data-color="{{item}}"
+      bindtap="onTagColor"
+      style="background:{{item}}"
+    ></view>
+  </view>
+
+  <view class="sheet__actions">
+    <view class="btn btn--primary" bindtap="saveTag">存进标签库</view>
+  </view>
+</view>
+
+<!-- 改一笔 -->
+<view wx:if="{{editing.visible}}" class="mask" bindtap="closeEdit" catchtouchmove="noop"></view>
+<view wx:if="{{editing.visible}}" class="sheet">
+  <view class="sheet__handle"></view>
+  <view class="sheet__title">改这一笔</view>
+
+  <view class="entry__types sheet__types">
+    <view class="type {{editing.type === 'expense' ? 'is-on' : ''}}" data-type="expense" bindtap="onEditType">支出</view>
+    <view class="type {{editing.type === 'income' ? 'is-on' : ''}}" data-type="income" bindtap="onEditType">收入</view>
+  </view>
+
+  <view class="amount">
+    <text class="amount__sign">¥</text>
+    <input
+      class="amount__input"
+      type="digit"
+      value="{{editing.amount}}"
+      placeholder="0.00"
+      placeholder-class="ph"
+      bindinput="onEditAmount"
+    />
+  </view>
+
+  <view class="tags">
+    <view
+      class="tag {{editing.tagId === item.id ? 'is-on' : ''}}"
+      wx:for="{{tags}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onEditTag"
+    >
+      <view class="tag__dot" style="background:{{item.colorHex}}"></view>{{item.name}}
+    </view>
+  </view>
+
+  <view class="row">
+    <text class="row__label">备注</text>
+    <input
+      class="row__input"
+      value="{{editing.remark}}"
+      placeholder="选填"
+      placeholder-class="ph"
+      maxlength="30"
+      bindinput="onEditRemark"
+    />
+  </view>
+
+  <view class="row row--tap" data-target="edit" bindtap="openTimeSheet">
+    <text class="row__label">发生时间</text>
+    <text class="row__value">{{editing.date}} {{editing.time}}</text>
+    <text class="row__hint">可改</text>
+  </view>
+
+  <view class="sheet__actions">
+    <view class="btn btn--ghost {{editing.confirmDelete ? 'is-danger' : ''}}" bindtap="deleteItem">
+      {{editing.confirmDelete ? '确认删除' : '删除'}}
+    </view>
+    <view class="btn btn--primary" bindtap="saveEdit">存好</view>
+  </view>
+</view>
+
+<!-- 月报 -->
+<view wx:if="{{reportVisible}}" class="report" bindtap="closeReport">
+  <image
+    class="report__img"
+    src="{{reportPath}}"
+    mode="widthFix"
+    show-menu-by-longpress
+    catchtap="noop"
+  />
+  <view class="report__tip">长按图片保存到相册 · 点空白处关闭</view>
+</view>
+
+<canvas type="2d" id="report-canvas" class="report__canvas" style="height:{{reportH}}px;"></canvas>
+
+<paper-toast id="paper-toast" />
+</view>

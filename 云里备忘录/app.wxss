@@ -1,0 +1,91 @@
+@import "styles/theme.wxss";
+
+/* 云里备忘录 · 全局样式
+   纸：F9F6F0  卡：FFFDF8  描边：E6DDCB
+   墨：3B342A  次字：6F6558  弱字：A2947E
+   朱红 C0553F  琥珀 B5793F  苔绿 5F7A5E  墨蓝 7A8FA6 */
+
+page {
+  --paper: #f9f6f0;
+  --card: #fffdf8;
+  --card-soft: #fdf9f0;
+  --line-sub: #f0e7d6;
+  --line: #e6ddcb;
+  --line-soft: #efe6d4;
+  --ink: #3b342a;
+  --ink-soft: #6f6558;
+  --ink-mute: #8b7c64;
+  --ink-faint: #a8977f;
+  --red: #c0553f;
+  --amber: #b5793f;
+  --moss: #5f7a5e;
+  --blue: #7a8fa6;
+  --brand: #8c4a2f;
+  --on-brand: #fff7f2;
+  --chip-on-bg: #fdf1ec;
+  --shadow: 0 10rpx 30rpx rgba(59, 52, 42, 0.06);
+
+  background: var(--paper);
+  color: var(--ink);
+  /* 中文别用衬线：Windows 上会掉到宋体，小字号全是锯齿；安卓也各不相同。
+     统一走各平台自带的黑体，字重和字号来做层次，跨端才稳。 */
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC",
+    "MiSans", "Source Han Sans SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  font-size: 28rpx;
+  line-height: 1.65;
+  letter-spacing: 0.2rpx;
+  -webkit-font-smoothing: antialiased;
+}
+
+view,
+text,
+image,
+input,
+textarea,
+scroll-view,
+swiper,
+swiper-item {
+  box-sizing: border-box;
+}
+
+/* 标题不再切字体族，靠字重和字距拉开层次 */
+.display {
+  font-weight: 500;
+  letter-spacing: 0.5rpx;
+}
+
+.card {
+  background: var(--card);
+  border: 1rpx solid var(--line);
+  border-radius: 30rpx;
+  box-shadow: var(--shadow);
+}
+
+.muted {
+  color: var(--ink-mute);
+}
+
+.hairline {
+  height: 1rpx;
+  background: var(--line);
+}
+
+/* 点击态：手账里按下去会有一点压痕 */
+.tap {
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+
+.tap:active {
+  transform: scale(0.985);
+  opacity: 0.92;
+}
+
+.page-body {
+  padding: 0 28rpx calc(220rpx + env(safe-area-inset-bottom));
+}
+
+.page-body--plain {
+  padding: 0 28rpx calc(40rpx + env(safe-area-inset-bottom));
+}
+
+/* 深色主题：底栏是单色线稿压白；返回键有独立配色，不再过滤 */

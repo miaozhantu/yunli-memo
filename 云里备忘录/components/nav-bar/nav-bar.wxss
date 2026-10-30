@@ -1,0 +1,58 @@
+.nav {
+  position: relative;
+  width: 100%;
+}
+
+.nav__bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper, #f9f6f0);
+}
+
+.nav__title {
+  font-size: 34rpx;
+  letter-spacing: 6rpx;
+  color: var(--ink, #3b342a);
+  /* 给胶囊留出右侧空间，标题才真的居中 */
+  padding: 0 180rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.nav__back {
+  position: absolute;
+  left: 8rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 88rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.nav__back--hover {
+  background: rgba(59, 52, 42, 0.06);
+}
+
+.nav__back-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+/* 右侧留给页面塞按钮，位置已经避开胶囊 */
+.nav__right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}

@@ -1,0 +1,73 @@
+<view class="root theme-{{theme}}">
+<nav-bar title="记事本" showBack="{{true}}" />
+
+<view class="page-body--plain">
+  <view class="head">
+    <view class="head__left">
+      <text class="head__title display">一共 {{total}} 篇</text>
+      <text class="head__sub">记下来的都算数</text>
+    </view>
+    <view class="head__btn tap" bindtap="newNote">写一篇</view>
+  </view>
+
+  <view class="search">
+    <input
+      class="search__input"
+      value="{{keyword}}"
+      placeholder="搜标题或正文"
+      placeholder-class="ph"
+      confirm-type="search"
+      bindinput="onSearch"
+    />
+    <view wx:if="{{keyword}}" class="search__clear" bindtap="clearSearch">清空</view>
+  </view>
+
+  <scroll-view class="filters" scroll-x enable-flex>
+    <view class="filters__inner">
+      <view
+        class="chip {{activeTag === 'all' ? 'is-on' : ''}}"
+        data-id="all"
+        bindtap="onTagTap"
+      >全部</view>
+      <view
+        class="chip {{activeTag === item.id ? 'is-on' : ''}}"
+        wx:for="{{tags}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onTagTap"
+      >
+        <view class="chip__dot" style="background:{{item.colorHex}}"></view>{{item.name}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{list.length}}" class="list">
+    <view
+      class="note card tap"
+      wx:for="{{list}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="openNote"
+    >
+      <view class="note__bar" style="background:{{item.color}}"></view>
+      <view class="note__body">
+        <view class="note__top">
+          <text class="note__title">{{item.title}}</text>
+          <text class="note__date">{{item.dateText}}</text>
+        </view>
+        <view class="note__excerpt">{{item.excerpt}}</view>
+        <view class="note__foot">
+          <text class="note__tag" style="color:{{item.color}}">{{item.tagName}}</text>
+          <view wx:if="{{item.hasAudio}}" class="note__audio">有录音</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty">
+    <view class="empty__text">{{emptyText}}</view>
+  </view>
+</view>
+
+<paper-toast id="paper-toast" />
+</view>

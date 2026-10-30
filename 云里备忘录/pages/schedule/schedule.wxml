@@ -1,0 +1,196 @@
+<view class="root theme-{{theme}}">
+<nav-bar title="日程安排" showBack="{{true}}" />
+
+<view class="page-body--plain">
+
+  <view class="datebar">
+    <view class="datebar__arrow" data-delta="-1" bindtap="switchDate">‹</view>
+    <picker mode="date" value="{{viewDate}}" bindchange="onPickDate" class="datebar__picker">
+      <view class="datebar__label">{{dateLabel}}<text class="datebar__caret">▾</text></view>
+    </picker>
+    <view class="datebar__arrow" data-delta="1" bindtap="switchDate">›</view>
+    <view wx:if="{{!isToday}}" class="datebar__today" bindtap="goToday">回到今天</view>
+  </view>
+
+  <view class="ov card">
+    <view class="ov__head">
+      <text class="ov__title display">概览</text>
+      <text class="ov__count">{{overview.length}} 件待办</text>
+      <view class="head-link" bindtap="goTemplate">周模板 ›</view>
+    </view>
+
+    <view wx:if="{{overview.length}}" class="ov__list">
+      <view
+        class="ovr"
+        wx:for="{{overview}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="locateTask"
+      >
+        <view class="ovr__check" data-id="{{item.id}}" catchtap="toggleDone">
+          <view class="ovr__ring" style="border-color:{{item.color}}"></view>
+        </view>
+        <text class="ovr__time">{{item.time}}</text>
+        <text class="ovr__brief">{{item.brief}}</text>
+      </view>
+    </view>
+    <view wx:else class="ov__empty">{{rows.length ? '这一天的事都收了' : '这一天还没有安排'}}</view>
+  </view>
+
+  <view class="timeline card">
+    <view class="tl__head">
+      <text class="tl__hint">{{isToday ? '现在 ' + nowLabel : '双击空白格添加'}}</text>
+      <view class="tl__view" bindtap="openViewSheet">{{viewLabel}} ›</view>
+    </view>
+
+    <scroll-view class="tl__scroll" style="height:{{scrollH}}rpx;" scroll-y scroll-top="{{scrollTop}}" scroll-with-animation>
+      <view class="tl__body" style="height:{{bodyHeight + 24}}rpx;">
+        <view class="tl__times">
+          <view class="tl__hour" wx:for="{{hours}}" wx:key="top" style="top:{{item.top}}rpx;">{{item.label}}</view>
+          <view class="tl__hour tl__hour--last" style="top:{{bodyHeight}}rpx;">{{endLabel}}</view>
+        </view>
+
+        <view class="tl__grid">
+          <view
+            class="tl__cell is-{{item.kind}} {{activeStart === item.start ? 'is-active' : ''}}"
+            wx:for="{{slots}}"
+            wx:key="start"
+            data-start="{{item.start}}"
+            style="height:{{slotH}}rpx;"
+            bindtap="onCellTap"
+          ></view>
+
+          <view
+            class="blk {{item.compact ? 'is-compact' : ''}} {{highlightKey === item.key ? 'is-hit' : ''}}"
+            wx:for="{{rows}}"
+            wx:key="key"
+            style="top:{{item.top}}rpx;height:{{item.height}}rpx;background:{{item.bg}};border-left-color:{{item.color}}"
+          >
+            <view
+              class="blk__row"
+              wx:for="{{item.items}}"
+              wx:for-item="line"
+              wx:key="id"
+              data-id="{{line.id}}"
+              catchtap="onTaskTap"
+            >
+              <text class="blk__title {{line.done ? 'is-done' : ''}}">{{line.title}}</text>
+            </view>
+          </view>
+
+          <view wx:if="{{nowTop >= 0}}" class="tl__now" style="top:{{nowTop}}rpx;">
+            <view class="tl__now-dot"></view>
+            <view class="tl__now-line"></view>
+          </view>
+
+          <view class="tl__flush" style="top:{{bodyHeight}}rpx;"></view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="log card">
+    <view class="log__head" bindtap="toggleDoneList">
+      <text class="log__title">已完成</text>
+      <text class="log__count">{{doneList.length}} 件</text>
+      <text class="log__arrow {{doneOpen ? 'is-open' : ''}}">›</text>
+    </view>
+    <view wx:if="{{doneOpen}}" class="log__list">
+      <view class="pas" wx:for="{{doneList}}" wx:key="id">
+        <view class="pas__check" data-id="{{item.id}}" catchtap="toggleDone">
+          <text class="pas__tick">✓</text>
+        </view>
+        <text class="pas__time">{{item.time}}</text>
+        <text class="pas__title">{{item.brief}}</text>
+      </view>
+      <view wx:if="{{!doneList.length}}" class="log__empty">还没有打勾的事</view>
+    </view>
+
+    <view class="log__head log__head--split" bindtap="togglePassed">
+      <text class="log__title">已翻篇</text>
+      <text class="log__count">{{passedList.length}} 件</text>
+      <text class="log__arrow {{passedOpen ? 'is-open' : ''}}">›</text>
+    </view>
+    <view wx:if="{{passedOpen}}" class="log__list">
+      <view class="pas" wx:for="{{passedList}}" wx:key="id" data-id="{{item.id}}" bindtap="onTaskTap">
+        <view class="pas__dot" style="background:{{item.color}}"></view>
+        <text class="pas__time">{{item.time}}</text>
+        <text class="pas__title pas__title--over">{{item.brief}}</text>
+      </view>
+      <view wx:if="{{!passedList.length}}" class="log__empty">没有过期的事</view>
+    </view>
+  </view>
+
+  <view class="foot">概览点一下能跳过去，左边圈一下算做完</view>
+</view>
+
+<view wx:if="{{viewSheet.visible}}" class="mask" bindtap="closeViewSheet" catchtouchmove="noop"></view>
+<view wx:if="{{viewSheet.visible}}" class="sheet">
+  <view class="sheet__handle"></view>
+  <view class="sheet__title">时间轴一格多长</view>
+  <view class="sheet__tip">改的是格子和新建任务的默认时长，已经记下的时间不会被改动。</view>
+  <view class="views">
+    <view
+      class="viewbtn {{slotMinutes === item.v ? 'is-on' : ''}}"
+      wx:for="{{views}}"
+      wx:key="v"
+      data-v="{{item.v}}"
+      bindtap="pickView"
+    >{{item.label}}</view>
+  </view>
+</view>
+
+<view wx:if="{{editing.visible}}" class="mask" bindtap="closeEditor" catchtouchmove="noop"></view>
+<view wx:if="{{editing.visible}}" class="sheet">
+  <view class="sheet__handle"></view>
+  <view class="sheet__range">{{editing.range}}</view>
+
+  <input
+    class="sheet__input"
+    value="{{editing.title}}"
+    placeholder="要做什么"
+    placeholder-class="ph"
+    focus="{{editing.focus}}"
+    maxlength="40"
+    confirm-type="done"
+    bindinput="onTitleInput"
+  />
+
+  <view class="sheet__row">
+    <text class="sheet__label">标签</text>
+    <view class="chips">
+      <view
+        class="chip {{editing.tagId === item.id ? 'is-on' : ''}}"
+        wx:for="{{tags}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onTagPick"
+      >
+        <view class="chip__dot" style="background:{{item.colorHex}}"></view>{{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <view class="sheet__row">
+    <text class="sheet__label">持续</text>
+    <view class="chips">
+      <view
+        class="chip {{editing.duration === item.v ? 'is-on' : ''}}"
+        wx:for="{{durations}}"
+        wx:key="v"
+        data-v="{{item.v}}"
+        bindtap="onDuration"
+      >{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="sheet__actions">
+    <view wx:if="{{!editing.isNew}}" class="btn btn--ghost {{editing.confirmDelete ? 'is-danger' : ''}}" bindtap="onDelete">
+      {{editing.confirmDelete ? '确认删除' : '删除'}}
+    </view>
+    <view class="btn btn--primary" bindtap="onSave">保存</view>
+  </view>
+</view>
+
+<paper-toast id="paper-toast" />
+</view>

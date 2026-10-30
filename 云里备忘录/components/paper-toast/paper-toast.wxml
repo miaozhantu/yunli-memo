@@ -1,0 +1,6 @@
+<view
+  wx:if="{{visible}}"
+  class="toast {{leaving ? 'toast--out' : 'toast--in'}}"
+>
+  <text class="toast__text">{{text}}</text>
+</view>

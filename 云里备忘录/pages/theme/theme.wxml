@@ -1,0 +1,38 @@
+<view class="root theme-{{theme}}">
+  <nav-bar title="主题皮肤" showBack="{{true}}" />
+
+  <view class="page-body--plain">
+    <view class="intro">换的是纸和墨的颜色，页面结构一点没动。挑一个顺眼的就行，随时能改回来。</view>
+
+    <view
+      class="skin card {{theme === item.id ? 'is-on' : ''}}"
+      wx:for="{{themes}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="pick"
+    >
+      <view class="skin__preview theme-{{item.id}}">
+        <view class="skin__paper">
+          <view class="skin__bar"></view>
+          <view class="skin__line"></view>
+          <view class="skin__line skin__line--short"></view>
+          <view class="skin__btn"></view>
+        </view>
+      </view>
+
+      <view class="skin__meta">
+        <view class="skin__name">{{item.name}}</view>
+        <view class="skin__desc">{{item.desc}}</view>
+        <view class="skin__dots">
+          <view class="skin__dot" wx:for="{{item.swatch}}" wx:for-item="c" wx:key="*this" style="background:{{c}};"></view>
+        </view>
+      </view>
+
+      <view class="skin__check {{theme === item.id ? 'is-on' : ''}}">{{theme === item.id ? '✓' : ''}}</view>
+    </view>
+
+    <view class="note">碎花的底纹是生成的无缝小图，只铺在纸面上，卡片一律实色，字不会被花挡住。黑金那套同理：斜纹只做底，金色只出现在按钮和入口上。</view>
+  </view>
+
+  <paper-toast id="paper-toast" />
+</view>

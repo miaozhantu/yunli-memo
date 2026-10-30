@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/schedule/schedule",
+    "pages/template/template",
+    "pages/notes/notes",
+    "pages/note-edit/note-edit",
+    "pages/ledger/ledger",
+    "pages/settings/settings",
+    "pages/profile/profile",
+    "pages/theme/theme",
+    "pages/guide/guide"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationStyle": "custom",
+    "backgroundColor": "#F9F6F0",
+    "navigationBarTitleText": "云里备忘录",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#B4A893",
+    "selectedColor": "#8C4A2F",
+    "backgroundColor": "#FFFDF8",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.record": {
+      "desc": "用于把语音备忘录下来存到本机，不会上传"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -1,0 +1,93 @@
+<view class="root theme-{{theme}}">
+<nav-bar title="云里备忘录" showBack="{{false}}" />
+
+<view class="page-body">
+  <view class="greet">
+    <view class="greet__date">{{masthead}}</view>
+    <view class="greet__text display">{{greeting}}</view>
+  </view>
+
+  <view class="entries">
+    <view class="entry card tap" data-url="/pages/schedule/schedule" bindtap="go">
+      <view class="entry__tile entry__tile--amber">
+        <image class="entry__icon" src="{{entryIcons.schedule}}" mode="aspectFit" />
+        <view class="tile__spark tile__spark--a"></view>
+        <view class="tile__spark tile__spark--b"></view>
+      </view>
+      <view class="entry__body">
+        <view class="entry__title">日程安排</view>
+        <view class="entry__sub">{{entrySub.schedule}}</view>
+      </view>
+      <view class="entry__arrow">›</view>
+    </view>
+
+    <view class="entry card tap" data-url="/pages/notes/notes" bindtap="go">
+      <view class="entry__tile entry__tile--moss">
+        <image class="entry__icon" src="{{entryIcons.notes}}" mode="aspectFit" />
+      </view>
+      <view class="entry__body">
+        <view class="entry__title">记事本</view>
+        <view class="entry__sub">{{entrySub.notes}}</view>
+      </view>
+      <view class="entry__arrow">›</view>
+    </view>
+
+    <view class="entry card tap" data-url="/pages/ledger/ledger" bindtap="go">
+      <view class="entry__tile entry__tile--red">
+        <image class="entry__icon" src="{{entryIcons.ledger}}" mode="aspectFit" />
+      </view>
+      <view class="entry__body">
+        <view class="entry__title">记账</view>
+        <view class="entry__sub">{{entrySub.ledger}}</view>
+      </view>
+      <view class="entry__arrow">›</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <text class="section__title display">此刻能做的小事</text>
+    <view class="section__more" bindtap="shuffle">换一批</view>
+  </view>
+
+  <view class="clip card">
+    <view class="clip__tape"></view>
+
+    <swiper
+      class="clip__swiper"
+      circular
+      autoplay
+      interval="{{interval}}"
+      duration="400"
+      current="{{current}}"
+      bindchange="onSwiperChange"
+    >
+      <swiper-item wx:for="{{slides}}" wx:key="key">
+        <view class="clip__slide">
+          <view class="clip__quote">「</view>
+          <view class="clip__text">
+            <view class="clip__tag">{{item.tag}}</view>
+            <view class="clip__title">{{item.title}}</view>
+            <view class="clip__desc">{{item.desc}}</view>
+            <view
+              class="clip__btn tap"
+              data-keyword="{{item.keyword}}"
+              catchtap="onKnow"
+            >去了解</view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+
+    <view class="clip__bar">
+      <view class="clip__track">
+        <view class="clip__fill" style="width:{{progress}}%"></view>
+      </view>
+      <text class="clip__idx">{{current + 1}} / {{slides.length}}</text>
+    </view>
+  </view>
+
+  <view class="foot">数据只存在这台手机上，不上传</view>
+</view>
+
+<paper-toast id="paper-toast" />
+</view>

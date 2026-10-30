@@ -1,0 +1,94 @@
+<view class="root theme-{{theme}}">
+<nav-bar title="{{isNew ? '写笔记' : '改笔记'}}" showBack="{{true}}">
+  <view slot="right" class="save-btn" bindtap="onSave">保存</view>
+</nav-bar>
+
+<view class="page-body--plain edit">
+  <input
+    class="title-input display"
+    value="{{title}}"
+    placeholder="标题"
+    placeholder-class="ph"
+    maxlength="40"
+    bindinput="onTitleInput"
+  />
+
+  <view class="bar">
+    <scroll-view class="bar__tags" scroll-x enable-flex>
+      <view class="bar__inner">
+        <view
+          class="chip {{tagId === item.id ? 'is-on' : ''}}"
+          wx:for="{{tags}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onTagTap"
+        >
+          <view class="chip__dot" style="background:{{item.colorHex}}"></view>{{item.name}}
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="bar__tr">
+      <text class="bar__tr-label">翻译</text>
+      <switch checked="{{translateOn}}" color="#5B93C7" bindchange="onTranslateChange" />
+    </view>
+  </view>
+
+  <view class="paper">
+    <textarea
+      class="paper__ta"
+      value="{{content}}"
+      placeholder="想到什么就写什么"
+      placeholder-class="ph"
+      maxlength="2000"
+      auto-height
+      bindinput="onContentInput"
+      adjust-position
+    />
+  </view>
+
+  <view wx:if="{{translateOn && translated}}" class="bubble">
+    <view class="bubble__tag">EN · 模拟翻译</view>
+    <view class="bubble__text">{{translated}}</view>
+  </view>
+
+  <view wx:if="{{audioPath}}" class="audio card">
+    <view class="audio__play" bindtap="playAudio">{{playing ? '停' : '播'}}</view>
+    <view class="audio__info">
+      <view class="audio__name">录音 · {{audioDuration}} 秒</view>
+      <view class="audio__tip">只在这台手机上，不会上传</view>
+    </view>
+    <view class="audio__del" bindtap="removeAudio">删</view>
+  </view>
+
+  <view wx:if="{{audioPath}}" class="audio-note">想找回来的时候，正文里写一句关键词，比翻录音快。</view>
+
+  <view wx:if="{{!isNew}}" class="danger" bindtap="onDelete">
+    {{confirmingDelete ? '确认撕掉这一页' : '撕掉这一页'}}
+  </view>
+</view>
+
+<view class="dock">
+  <view class="dock__hint {{recording ? 'is-rec' : ''}}">
+    <block wx:if="{{recording}}">
+      <view class="wave">
+        <view class="wave__bar" style="animation-delay:0s"></view>
+        <view class="wave__bar" style="animation-delay:.12s"></view>
+        <view class="wave__bar" style="animation-delay:.24s"></view>
+        <view class="wave__bar" style="animation-delay:.36s"></view>
+        <view class="wave__bar" style="animation-delay:.48s"></view>
+      </view>
+      <text class="dock__text">录音中 {{elapsed}}s · 点一下结束</text>
+    </block>
+    <text wx:else class="dock__text">按一下开始录，只存在本机</text>
+  </view>
+
+  <view class="mic {{recording ? 'is-rec' : ''}}" bindtap="toggleRecord">
+    <view class="mic__head"></view>
+    <view class="mic__arc"></view>
+    <view class="mic__stem"></view>
+  </view>
+</view>
+
+<paper-toast id="paper-toast" />
+</view>

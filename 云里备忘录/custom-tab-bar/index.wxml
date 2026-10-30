@@ -1,0 +1,19 @@
+<view class="tabbar theme-{{theme}}">
+  <view
+    wx:for="{{list}}"
+    wx:key="pagePath"
+    class="tabbar__item"
+    data-index="{{index}}"
+    bindtap="onTap"
+    hover-class="tabbar__item--hover"
+    hover-stay-time="60"
+  >
+    <image
+      class="tabbar__icon {{selected === index ? 'tabbar__icon--on' : ''}}"
+      src="{{icons[item.icon]}}"
+      mode="aspectFit"
+    />
+    <view class="tabbar__label {{selected === index ? 'tabbar__label--on' : ''}}">{{item.text}}</view>
+    <view class="tabbar__ink {{selected === index ? 'tabbar__ink--on' : ''}}"></view>
+  </view>
+</view>

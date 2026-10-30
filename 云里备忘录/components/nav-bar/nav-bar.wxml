@@ -1,0 +1,17 @@
+<view class="nav" style="height:{{statusBarHeight + navBarHeight}}px;">
+  <view class="nav__bar" style="top:{{statusBarHeight}}px;height:{{navBarHeight}}px;">
+    <view
+      wx:if="{{showBack}}"
+      class="nav__back"
+      hover-class="nav__back--hover"
+      hover-stay-time="80"
+      bindtap="onBack"
+    >
+      <image class="nav__back-icon" src="{{backIcon}}" mode="aspectFit" />
+    </view>
+    <view class="nav__title display">{{title}}</view>
+    <view class="nav__right" style="right:{{rightOffset}}px;">
+      <slot name="right"></slot>
+    </view>
+  </view>
+</view>
